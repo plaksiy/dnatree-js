@@ -4,24 +4,23 @@
 
   json2csv.convert = function (JSONData, ReportTitle, ShowLabel) {
     console.log("Start json2csv.convert");
+    var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+    var CSV = '';
 
     function replaceAllDoubleQuotes(str) {
         if (str)
           return str.replace(new RegExp("\"", 'g'), "'");
         else
-          return str
+          return str;
     }
 
-    var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
-    var CSV = '';
-
     if (ShowLabel) {
-        var row = "";
-        for (var index in arrData[0]) {
-            row += index + ',';
+        var label = "";
+        for (var col in arrData[0]) {
+            label += col + ',';
         }
-        row = row.slice(0, -1);
-        CSV += row + '\r\n';
+        label = label.slice(0, -1);
+        CSV += label + '\r\n';
     }
 
     for (var i = 0; i < arrData.length; i++) {
@@ -48,7 +47,7 @@
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }
+  };
 
   window.json2csv = json2csv;
 
