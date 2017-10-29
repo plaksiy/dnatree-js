@@ -4,6 +4,11 @@
 
   json2csv.convert = function (JSONData, ReportTitle, ShowLabel) {
     console.log("Start json2csv.convert");
+
+    function replaceAllDoubleQuotes(str) {
+        return str.replace(new RegExp("\"", 'g'), "'");
+    }
+
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     var CSV = '';
 
@@ -19,7 +24,7 @@
     for (var i = 0; i < arrData.length; i++) {
         var row = "";
         for (var index in arrData[i]) {
-            row += '"' + arrData[i][index] + '",';
+            row += '"' + replaceAllDoubleQuotes(arrData[i][index]) + '",';
         }
         row.slice(0, row.length - 1);
         CSV += row + '\r\n';
