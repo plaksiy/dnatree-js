@@ -6,7 +6,10 @@
     console.log("Start json2csv.convert");
 
     function replaceAllDoubleQuotes(str) {
-        return str.replace(new RegExp("\"", 'g'), "'");
+        if (str)
+          return str.replace(new RegExp("\"", 'g'), "'");
+        else
+          return str
     }
 
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
